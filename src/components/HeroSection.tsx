@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { ContactButton } from './ContactButton.tsx';
-import { Magnet } from './Magnet.tsx';
 import type { PortfolioConfig } from '../data/portfolioData.ts';
 
 interface HeroSectionProps {
@@ -109,8 +108,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         )}
       </AnimatePresence>
 
-      {/* 2. Hero Heading - sized proportionally so 'HI, I\'M VICTORIA' displays fully on all desktop screens without horizontal clipping */}
-      <div className="overflow-hidden w-full text-center mt-3 sm:mt-4 md:-mt-5 z-0 pointer-events-none select-none px-3 sm:px-6 md:px-8">
+      {/* 2. Hero Heading - centered boldly in viewport */}
+      <div className="flex-1 flex items-center justify-center overflow-hidden w-full text-center z-10 pointer-events-none select-none px-3 sm:px-6 md:px-8">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -121,38 +120,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </motion.h1>
       </div>
 
-      {/* 3. Hero Portrait with Magnet */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute left-1/2 -translate-x-1/2 z-10 w-[240px] xs:w-[280px] sm:w-[350px] md:w-[420px] lg:w-[480px] top-[48%] -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-auto"
-      >
-        <Magnet
-          padding={120}
-          strength={3}
-          activeTransition="transform 0.3s ease-out"
-          inactiveTransition="transform 0.6s ease-in-out"
-          className="w-full flex justify-center"
-        >
-          <img
-            src={config.avatarUrl}
-            alt={`${config.name} - ${config.role} portrait`}
-            referrerPolicy="no-referrer"
-            className="w-full max-h-[50vh] sm:max-h-[60vh] md:max-h-[66vh] object-contain pointer-events-none drop-shadow-2xl rounded-3xl"
-          />
-        </Magnet>
-      </motion.div>
-
-      {/* 4. Bottom bar */}
-      <div className="w-full flex flex-row justify-between items-end pb-5 sm:pb-8 md:pb-10 px-4 sm:px-6 md:px-10 z-20 gap-3">
+      {/* 3. Bottom bar */}
+      <div className="w-full flex flex-row justify-between items-end pb-6 sm:pb-8 md:pb-10 px-4 sm:px-6 md:px-10 z-20 gap-3">
         {/* Left paragraph */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ fontSize: 'clamp(0.65rem, 1.25vw, 1.4rem)' }}
-          className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[140px] xs:max-w-[170px] sm:max-w-[240px] md:max-w-[300px]"
+          style={{ fontSize: 'clamp(0.7rem, 1.3vw, 1.4rem)' }}
+          className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[150px] xs:max-w-[190px] sm:max-w-[260px] md:max-w-[320px]"
         >
           {config.heroBio}
         </motion.p>
