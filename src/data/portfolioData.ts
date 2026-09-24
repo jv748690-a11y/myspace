@@ -1,3 +1,15 @@
+// Import image assets so Vite bundles and hashes them correctly in production builds (Netlify, Vercel, Render, etc.)
+import victoriaPortrait from '../assets/images/victoria_portrait_1790281202018.jpg';
+import victoriaAvatar2 from '../assets/images/victoria_3d_avatar_1790281215893.jpg';
+import siwesLogin from '../assets/images/siwes_login_1790281803972.jpg';
+import siwesFeatures from '../assets/images/siwes_features_1790281839944.jpg';
+import siwesMockup from '../assets/images/siwes_mockup_1790281254682.jpg';
+import veegemHero from '../assets/images/veegem_hero_1790281851505.jpg';
+import veegemEarrings from '../assets/images/veegem_earrings_1790281828389.jpg';
+import veegemMockup from '../assets/images/veegem_mockup_1790281242415.jpg';
+import pulseInflation from '../assets/images/pulse_inflation_1790281816414.jpg';
+import pulseMockup from '../assets/images/naijapulse_mockup_1790281268561.jpg';
+
 export interface PortfolioConfig {
   name: string;
   pronouns?: string;
@@ -46,17 +58,17 @@ export const defaultPortfolioConfig: PortfolioConfig = {
   role: 'Full Stack Developer',
   heroHeadline: "Hi, i'm victoria",
   heroBio: 'a full stack developer driven by crafting striking, robust, and unforgettable digital experiences',
-  avatarUrl: '/src/assets/images/victoria_portrait_1790281202018.jpg',
+  avatarUrl: victoriaPortrait,
   avatarOptions: [
     {
       id: 'portrait_1',
       label: '3D Victoria (Modern Chic)',
-      url: '/src/assets/images/victoria_portrait_1790281202018.jpg',
+      url: victoriaPortrait,
     },
     {
       id: 'portrait_2',
       label: '3D Victoria (Tech Hoodie)',
-      url: '/src/assets/images/victoria_3d_avatar_1790281215893.jpg',
+      url: victoriaAvatar2,
     },
     {
       id: 'original_jack',
@@ -125,9 +137,9 @@ export const defaultPortfolioConfig: PortfolioConfig = {
       ],
       tools: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
       images: {
-        col1Top: '/src/assets/images/siwes_login_1790281803972.jpg',
-        col1Bottom: '/src/assets/images/siwes_features_1790281839944.jpg',
-        col2: '/src/assets/images/siwes_mockup_1790281254682.jpg',
+        col1Top: siwesLogin,
+        col1Bottom: siwesFeatures,
+        col2: siwesMockup,
       },
       liveUrl: 'https://trackmysiwes.app',
       githubUrl: 'https://github.com/jv748690-a11y/trackmysiwes',
@@ -148,9 +160,9 @@ export const defaultPortfolioConfig: PortfolioConfig = {
       ],
       tools: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Stripe / Paystack'],
       images: {
-        col1Top: '/src/assets/images/veegem_hero_1790281851505.jpg',
-        col1Bottom: '/src/assets/images/veegem_earrings_1790281828389.jpg',
-        col2: '/src/assets/images/veegem_mockup_1790281242415.jpg',
+        col1Top: veegemHero,
+        col1Bottom: veegemEarrings,
+        col2: veegemMockup,
       },
       liveUrl: 'https://veegem.shop',
       githubUrl: 'https://github.com/jv748690-a11y/vee-gem',
@@ -171,9 +183,9 @@ export const defaultPortfolioConfig: PortfolioConfig = {
       ],
       tools: ['React', 'TypeScript', 'Tailwind CSS', 'Recharts', 'FastAPI / Node'],
       images: {
-        col1Top: '/src/assets/images/pulse_inflation_1790281816414.jpg',
-        col1Bottom: '/src/assets/images/naijapulse_mockup_1790281268561.jpg',
-        col2: '/src/assets/images/pulse_inflation_1790281816414.jpg',
+        col1Top: pulseInflation,
+        col1Bottom: pulseMockup,
+        col2: pulseInflation,
       },
       liveUrl: 'https://naijapulse.finance',
       githubUrl: 'https://github.com/jv748690-a11y/naijapulse',

@@ -87,21 +87,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <button
               type="button"
               onClick={() => handleMobileNav('about')}
-              className="text-[#D7E2EA] font-semibold uppercase tracking-wider text-base py-2 hover:text-white"
+              className="text-[#D7E2EA] font-semibold uppercase tracking-wider text-base py-2 hover:text-white cursor-pointer"
             >
               About
             </button>
             <button
               type="button"
               onClick={() => handleMobileNav('projects')}
-              className="text-[#D7E2EA] font-semibold uppercase tracking-wider text-base py-2 hover:text-white"
+              className="text-[#D7E2EA] font-semibold uppercase tracking-wider text-base py-2 hover:text-white cursor-pointer"
             >
               Projects
             </button>
             <button
               type="button"
               onClick={() => handleMobileNav('contact')}
-              className="text-[#D7E2EA] font-semibold uppercase tracking-wider text-base py-2 hover:text-white"
+              className="text-[#D7E2EA] font-semibold uppercase tracking-wider text-base py-2 hover:text-white cursor-pointer"
             >
               Contact
             </button>
@@ -109,13 +109,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         )}
       </AnimatePresence>
 
-      {/* 2. Hero Heading */}
-      <div className="overflow-hidden w-full text-center mt-3 sm:mt-4 md:-mt-5 z-0 pointer-events-none select-none px-2">
+      {/* 2. Hero Heading - sized proportionally so 'HI, I\'M VICTORIA' displays fully on all desktop screens without horizontal clipping */}
+      <div className="overflow-hidden w-full text-center mt-3 sm:mt-4 md:-mt-5 z-0 pointer-events-none select-none px-3 sm:px-6 md:px-8">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[12vw] sm:text-[14vw] md:text-[15.5vw] lg:text-[17vw]"
+          className="hero-heading font-black uppercase tracking-normal sm:tracking-tight leading-none whitespace-nowrap w-full text-[10vw] xs:text-[10.5vw] sm:text-[11.2vw] md:text-[11.8vw] lg:text-[12.2vw] xl:text-[12.6vw] max-w-full mx-auto"
         >
           {config.heroHeadline}
         </motion.h1>
@@ -126,7 +126,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute left-1/2 -translate-x-1/2 z-10 w-[240px] xs:w-[280px] sm:w-[350px] md:w-[420px] lg:w-[490px] top-[48%] -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-auto"
+        className="absolute left-1/2 -translate-x-1/2 z-10 w-[240px] xs:w-[280px] sm:w-[350px] md:w-[420px] lg:w-[480px] top-[48%] -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-auto"
       >
         <Magnet
           padding={120}
@@ -139,7 +139,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             src={config.avatarUrl}
             alt={`${config.name} - ${config.role} portrait`}
             referrerPolicy="no-referrer"
-            className="w-full max-h-[50vh] sm:max-h-[62vh] md:max-h-[68vh] object-contain pointer-events-none drop-shadow-2xl rounded-3xl"
+            className="w-full max-h-[50vh] sm:max-h-[60vh] md:max-h-[66vh] object-contain pointer-events-none drop-shadow-2xl rounded-3xl"
           />
         </Magnet>
       </motion.div>
@@ -151,8 +151,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ fontSize: 'clamp(0.65rem, 1.3vw, 1.5rem)' }}
-          className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[140px] xs:max-w-[170px] sm:max-w-[240px] md:max-w-[280px]"
+          style={{ fontSize: 'clamp(0.65rem, 1.25vw, 1.4rem)' }}
+          className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[140px] xs:max-w-[170px] sm:max-w-[240px] md:max-w-[300px]"
         >
           {config.heroBio}
         </motion.p>
