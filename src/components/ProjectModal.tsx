@@ -1,24 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react';
+import { X, ExternalLink, Github, CheckCircle2 } from 'lucide-react';
 import { LiveProjectButton } from './LiveProjectButton.tsx';
-import { ContactButton } from './ContactButton.tsx';
+import type { PortfolioConfig } from '../data/portfolioData.ts';
 
-export interface ProjectData {
-  id: string;
-  number: string;
-  name: string;
-  category: 'Client' | 'Personal';
-  description: string;
-  scope: string[];
-  tools: string[];
-  images: {
-    col1Top: string;
-    col1Bottom: string;
-    col2: string;
-  };
-  liveUrl?: string;
-}
+export type ProjectData = PortfolioConfig['projects'][number];
 
 interface ProjectModalProps {
   project: ProjectData | null;
@@ -59,7 +45,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </span>
               <div>
                 <span className="text-xs uppercase tracking-widest text-[#BBCCD7]">
-                  {project.category} Project
+                  {project.category} Project &bull; {project.tagline}
                 </span>
                 <h2 className="text-xl sm:text-3xl font-black uppercase text-white">
                   {project.name}
@@ -114,17 +100,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/10">
               <div className="md:col-span-2">
                 <h3 className="text-sm uppercase tracking-widest text-[#BBCCD7] mb-2 font-medium">
-                  Overview & Direction
+                  Architecture & Product Solution
                 </h3>
                 <p className="text-sm sm:text-base text-[#D7E2EA]/90 leading-relaxed font-light">
                   {project.description}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-wrap gap-2">
                   {project.tools.map((tool) => (
                     <span
                       key={tool}
-                      className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-[#BBCCD7]"
+                      className="px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs text-[#BBCCD7] font-medium"
                     >
                       {tool}
                     </span>
@@ -135,7 +121,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <div className="space-y-4">
                 <div>
                   <h4 className="text-xs uppercase tracking-widest text-[#BBCCD7] mb-2 font-medium">
-                    Deliverables
+                    Key Deliverables
                   </h4>
                   <ul className="text-xs space-y-1.5 text-[#D7E2EA]">
                     {project.scope.map((item, idx) => (
@@ -147,25 +133,34 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   </ul>
                 </div>
 
-                <div className="pt-2 flex flex-col gap-2">
-                  <LiveProjectButton
-                    label="View Live Showcase"
-                    onClick={() => {
-                      if (project.liveUrl) {
-                        window.open(project.liveUrl, '_blank');
-                      }
-                    }}
-                    className="w-full text-center"
-                  />
+                <div className="pt-2 flex flex-col gap-2.5">
+                  {project.liveUrl && (
+                    <LiveProjectButton
+                      label="View Project"
+                      onClick={() => window.open(project.liveUrl, '_blank')}
+                      className="w-full text-center"
+                    />
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-[#BBCCD7] hover:text-white py-2 rounded-full border border-white/15 hover:border-white/40 transition-colors"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      GitHub Repo
+                    </a>
+                  )}
                   <button
                     type="button"
                     onClick={() => {
                       onClose();
                       onContactClick();
                     }}
-                    className="text-xs uppercase tracking-widest text-[#BBCCD7] hover:text-white py-2 text-center underline cursor-pointer"
+                    className="text-xs uppercase tracking-widest text-[#BBCCD7] hover:text-white py-1 text-center underline cursor-pointer"
                   >
-                    Request Similar Project
+                    Inquire Similar Project
                   </button>
                 </div>
               </div>

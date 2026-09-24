@@ -3,31 +3,29 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HeroSection } from './components/HeroSection.tsx';
 import { MarqueeSection } from './components/MarqueeSection.tsx';
 import { AboutSection } from './components/AboutSection.tsx';
 import { ServicesSection } from './components/ServicesSection.tsx';
 import { ProjectsSection } from './components/ProjectsSection.tsx';
 import { ContactModal } from './components/ContactModal.tsx';
-import { PricingModal } from './components/PricingModal.tsx';
 import { ProjectModal, type ProjectData } from './components/ProjectModal.tsx';
 import { Footer } from './components/Footer.tsx';
+import { defaultPortfolioConfig } from './data/portfolioData.ts';
 
 export default function App() {
+  const config = defaultPortfolioConfig;
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isPricingOpen, setIsPricingOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState('3D Modeling');
+  const [selectedService, setSelectedService] = useState('Full Stack Web Architecture');
   const [activeProject, setActiveProject] = useState<ProjectData | null>(null);
 
-  const handleNavClick = (section: 'about' | 'price' | 'projects' | 'contact') => {
+  const handleNavClick = (section: 'about' | 'projects' | 'contact') => {
     if (section === 'about') {
       const el = document.getElementById('about');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
-    } else if (section === 'price') {
-      setIsPricingOpen(true);
     } else if (section === 'projects') {
       const el = document.getElementById('projects');
       if (el) {
@@ -43,12 +41,6 @@ export default function App() {
     setIsContactOpen(true);
   };
 
-  const handleSelectPricingTier = (tierName: string) => {
-    setIsPricingOpen(false);
-    setSelectedService(tierName);
-    setIsContactOpen(true);
-  };
-
   return (
     <div
       style={{ overflowX: 'clip' }}
@@ -56,6 +48,7 @@ export default function App() {
     >
       {/* 1. HERO SECTION */}
       <HeroSection
+        config={config}
         onNavClick={handleNavClick}
         onContactClick={() => setIsContactOpen(true)}
       />
@@ -64,28 +57,35 @@ export default function App() {
       <MarqueeSection />
 
       {/* 3. ABOUT SECTION */}
-      <AboutSection onContactClick={() => setIsContactOpen(true)} />
+      <AboutSection
+        config={config}
+        onContactClick={() => setIsContactOpen(true)}
+      />
 
-      {/* 4. SERVICES SECTION */}
-      <ServicesSection onSelectService={handleOpenContactWithService} />
+      {/* 4. SERVICES SECTION (Only Contact Inquiry) */}
+      <ServicesSection
+        services={config.services}
+        onSelectService={handleOpenContactWithService}
+      />
 
       {/* 5. PROJECTS SECTION */}
-      <ProjectsSection onOpenProject={(proj) => setActiveProject(proj)} />
+      <ProjectsSection
+        projects={config.projects}
+        onOpenProject={(proj) => setActiveProject(proj)}
+      />
 
       {/* FOOTER */}
-      <Footer onNavClick={handleNavClick} />
+      <Footer
+        config={config}
+        onNavClick={handleNavClick}
+      />
 
       {/* INTERACTIVE MODALS */}
       <ContactModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
         defaultService={selectedService}
-      />
-
-      <PricingModal
-        isOpen={isPricingOpen}
-        onClose={() => setIsPricingOpen(false)}
-        onSelectTier={handleSelectPricingTier}
+        config={config}
       />
 
       <ProjectModal

@@ -2,88 +2,15 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FadeIn } from './FadeIn.tsx';
 import { LiveProjectButton } from './LiveProjectButton.tsx';
-import type { ProjectData } from './ProjectModal.tsx';
+import type { PortfolioConfig } from '../data/portfolioData.ts';
 
-export const projectsList: ProjectData[] = [
-  {
-    id: 'nextlevel-studio',
-    number: '01',
-    name: 'Nextlevel Studio',
-    category: 'Client',
-    description:
-      'A comprehensive 3D brand refresh and motion asset suite for an avant-garde creative studio. Included procedural materials, dynamic typography animation, and interactive WebGL assets.',
-    scope: [
-      'Art direction & concept design',
-      'Hero 3D scenes & lighting',
-      'High-poly procedural assets',
-      'Social cutdowns & looping motion graphics',
-    ],
-    tools: ['Blender', 'Octane Render', 'Cinema 4D', 'After Effects'],
-    images: {
-      col1Top:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85',
-      col1Bottom:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85',
-      col2:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85',
-    },
-    liveUrl: 'https://nextlevelstudio.design',
-  },
-  {
-    id: 'aura-brand-identity',
-    number: '02',
-    name: 'Aura Brand Identity',
-    category: 'Personal',
-    description:
-      'An exploratory personal study investigating sculptural chrome typography, refractive glass shaders, and surreal spatial aesthetics designed for modern sensory brands.',
-    scope: [
-      'Custom 3D lettering & typographic geometry',
-      'Caustic lighting simulations',
-      '4K editorial showcase stills',
-      'Interactive WebGL packaging concept',
-    ],
-    tools: ['Cinema 4D', 'Redshift', 'Three.js', 'Substance Painter'],
-    images: {
-      col1Top:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85',
-      col1Bottom:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85',
-      col2:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85',
-    },
-    liveUrl: 'https://auraidentity.art',
-  },
-  {
-    id: 'solaris-digital',
-    number: '03',
-    name: 'Solaris Digital',
-    category: 'Client',
-    description:
-      'Futuristic industrial 3D visualization and kinetic product showcase for Solaris Digital. Developed hyper-detailed mechanical parts, animated assemblies, and conversion-oriented landing page visuals.',
-    scope: [
-      'Hard-surface CAD modeling & retopology',
-      'Mechanical exploded view animations',
-      'Studio environment lighting setup',
-      'Web-ready GLTF pipeline',
-    ],
-    tools: ['Blender', 'Houdini', 'Octane', 'Figma'],
-    images: {
-      col1Top:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85',
-      col1Bottom:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85',
-      col2:
-        'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85',
-    },
-    liveUrl: 'https://solarisdigital.io',
-  },
-];
+type ProjectItem = PortfolioConfig['projects'][number];
 
 interface CardProps {
-  project: ProjectData;
+  project: ProjectItem;
   index: number;
   totalCards: number;
-  onOpenProject: (project: ProjectData) => void;
+  onOpenProject: (project: ProjectItem) => void;
 }
 
 const ProjectCard: React.FC<CardProps> = ({
@@ -127,7 +54,7 @@ const ProjectCard: React.FC<CardProps> = ({
             </span>
             <div className="flex flex-col">
               <span className="text-xs uppercase tracking-widest text-[#BBCCD7] font-medium">
-                {project.category}
+                {project.category} &bull; {project.tagline}
               </span>
               <h3 className="font-medium uppercase text-lg sm:text-2xl md:text-3xl text-white tracking-tight">
                 {project.name}
@@ -135,7 +62,7 @@ const ProjectCard: React.FC<CardProps> = ({
             </div>
           </div>
 
-          <div className="self-end sm:self-center">
+          <div className="self-end sm:self-center flex items-center gap-3">
             <LiveProjectButton onClick={() => onOpenProject(project)} />
           </div>
         </div>
@@ -152,11 +79,12 @@ const ProjectCard: React.FC<CardProps> = ({
             >
               <img
                 src={project.images.col1Top}
-                alt={`${project.name} preview 1`}
+                alt={`${project.name} overview`}
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
             </div>
 
             {/* Left Bottom Image */}
@@ -167,11 +95,12 @@ const ProjectCard: React.FC<CardProps> = ({
             >
               <img
                 src={project.images.col1Bottom}
-                alt={`${project.name} preview 2`}
+                alt={`${project.name} features`}
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
             </div>
           </div>
 
@@ -182,11 +111,12 @@ const ProjectCard: React.FC<CardProps> = ({
           >
             <img
               src={project.images.col2}
-              alt={`${project.name} preview 3`}
+              alt={`${project.name} hero showcase`}
               loading="lazy"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
           </div>
         </div>
       </motion.div>
@@ -195,10 +125,14 @@ const ProjectCard: React.FC<CardProps> = ({
 };
 
 interface ProjectsSectionProps {
-  onOpenProject: (project: ProjectData) => void;
+  projects: PortfolioConfig['projects'];
+  onOpenProject: (project: ProjectItem) => void;
 }
 
-export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject }) => {
+export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
+  projects,
+  onOpenProject,
+}) => {
   return (
     <section
       id="projects"
@@ -211,18 +145,21 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProject 
             style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
             className="hero-heading font-black uppercase leading-none tracking-tight"
           >
-            Project
+            Projects
           </h2>
+          <p className="mt-3 text-xs sm:text-sm uppercase tracking-widest text-[#BBCCD7] font-light">
+            Selected Full Stack &bull; Web &bull; E-Commerce &bull; Fintech Engineering
+          </p>
         </FadeIn>
 
         {/* 3 Stacking Cards */}
         <div className="relative flex flex-col gap-10">
-          {projectsList.map((project, index) => (
+          {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
               index={index}
-              totalCards={projectsList.length}
+              totalCards={projects.length}
               onOpenProject={onOpenProject}
             />
           ))}

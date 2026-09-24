@@ -1,11 +1,13 @@
 import React from 'react';
-import { ArrowUp, Instagram, Twitter, Linkedin, Dribbble, Github } from 'lucide-react';
+import { ArrowUp, Instagram, Github, Mail, Twitter } from 'lucide-react';
+import type { PortfolioConfig } from '../data/portfolioData.ts';
 
 interface FooterProps {
-  onNavClick: (section: 'about' | 'price' | 'projects' | 'contact') => void;
+  config: PortfolioConfig;
+  onNavClick: (section: 'about' | 'projects' | 'contact') => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
+export const Footer: React.FC<FooterProps> = ({ config, onNavClick }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -16,28 +18,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
         {/* Brand mark */}
         <div className="flex flex-col items-center md:items-start gap-1">
           <span className="text-xl font-bold uppercase tracking-wider text-white">
-            JACK
+            {config.name}
           </span>
           <span className="text-xs text-[#BBCCD7] font-light uppercase tracking-wider">
-            3D Creator & Visual Designer
+            {config.role} &bull; Web & Product Engineering
           </span>
         </div>
 
-        {/* Quick Nav Links */}
-        <div className="flex items-center gap-6 text-xs uppercase tracking-widest text-[#BBCCD7]">
+        {/* Quick Nav & Social Links */}
+        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs uppercase tracking-widest text-[#BBCCD7]">
           <button
             type="button"
             onClick={() => onNavClick('about')}
             className="hover:text-white transition-colors cursor-pointer"
           >
             About
-          </button>
-          <button
-            type="button"
-            onClick={() => onNavClick('price')}
-            className="hover:text-white transition-colors cursor-pointer"
-          >
-            Price
           </button>
           <button
             type="button"
@@ -53,12 +48,57 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
           >
             Contact
           </button>
+
+          <span className="text-white/20">|</span>
+
+          {/* Socials */}
+          <a
+            href={config.socials.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+            title="X (Twitter)"
+          >
+            <Twitter className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">X</span>
+          </a>
+
+          <a
+            href={config.socials.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+            title="Instagram"
+          >
+            <Instagram className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">IG</span>
+          </a>
+
+          <a
+            href={config.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+            title="GitHub"
+          >
+            <Github className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">GitHub</span>
+          </a>
+
+          <a
+            href={`mailto:${config.socials.email}`}
+            className="flex items-center gap-1.5 hover:text-white transition-colors"
+            title="Email"
+          >
+            <Mail className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Email</span>
+          </a>
         </div>
 
         {/* Copyright & Back to Top */}
         <div className="flex items-center gap-4">
           <span className="text-xs text-[#BBCCD7]/60">
-            &copy; {new Date().getFullYear()} Jack. All rights reserved.
+            &copy; {new Date().getFullYear()} {config.name}. All rights reserved.
           </span>
           <button
             type="button"

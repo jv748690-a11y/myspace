@@ -1,14 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { SlidersHorizontal } from 'lucide-react';
 import { ContactButton } from './ContactButton.tsx';
 import { Magnet } from './Magnet.tsx';
+import type { PortfolioConfig } from '../data/portfolioData.ts';
 
 interface HeroSectionProps {
-  onNavClick: (section: 'about' | 'price' | 'projects' | 'contact') => void;
+  config: PortfolioConfig;
+  onNavClick: (section: 'about' | 'projects' | 'contact') => void;
   onContactClick: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
+  config,
   onNavClick,
   onContactClick,
 }) => {
@@ -28,13 +32,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         >
           About
         </button>
-        <button
-          type="button"
-          onClick={() => onNavClick('price')}
-          className="text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem] transition-opacity duration-200 hover:opacity-70 cursor-pointer"
-        >
-          Price
-        </button>
+
         <button
           type="button"
           onClick={() => onNavClick('projects')}
@@ -42,6 +40,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         >
           Projects
         </button>
+
         <button
           type="button"
           onClick={() => onNavClick('contact')}
@@ -57,9 +56,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[14vw] sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw]"
+          className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-[13.5vw] sm:text-[15vw] md:text-[16vw] lg:text-[17vw]"
         >
-          Hi, i&apos;m jack
+          {config.heroHeadline}
         </motion.h1>
       </div>
 
@@ -68,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute left-1/2 -translate-x-1/2 z-10 w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px] top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-auto"
+        className="absolute left-1/2 -translate-x-1/2 z-10 w-[280px] sm:w-[350px] md:w-[420px] lg:w-[490px] top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 pointer-events-auto"
       >
         <Magnet
           padding={150}
@@ -78,10 +77,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           className="w-full flex justify-center"
         >
           <img
-            src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-            alt="Jack 3D Creator Portrait"
+            src={config.avatarUrl}
+            alt={`${config.name} - ${config.role} portrait`}
             referrerPolicy="no-referrer"
-            className="w-full h-auto object-contain pointer-events-none drop-shadow-2xl"
+            className="w-full max-h-[68vh] object-contain pointer-events-none drop-shadow-2xl rounded-3xl"
           />
         </Magnet>
       </motion.div>
@@ -94,9 +93,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
           style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
-          className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[260px]"
+          className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[170px] sm:max-w-[240px] md:max-w-[280px]"
         >
-          a 3d creator driven by crafting striking and unforgettable projects
+          {config.heroBio}
         </motion.p>
 
         {/* Right Contact button */}

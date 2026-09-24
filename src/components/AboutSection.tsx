@@ -2,15 +2,14 @@ import React from 'react';
 import { FadeIn } from './FadeIn.tsx';
 import { AnimatedText } from './AnimatedText.tsx';
 import { ContactButton } from './ContactButton.tsx';
+import type { PortfolioConfig } from '../data/portfolioData.ts';
 
 interface AboutSectionProps {
+  config: PortfolioConfig;
   onContactClick: () => void;
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) => {
-  const aboutText =
-    "With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!";
-
+export const AboutSection: React.FC<AboutSectionProps> = ({ config, onContactClick }) => {
   return (
     <section
       id="about"
@@ -22,7 +21,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
         <FadeIn delay={0.1} x={-80} y={0} duration={0.9}>
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
-            alt="3D Moon Element"
+            alt="3D Decorative Element"
             referrerPolicy="no-referrer"
             className="w-[120px] sm:w-[160px] md:w-[210px] h-auto object-contain select-none drop-shadow-xl"
           />
@@ -73,7 +72,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
             style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
             className="hero-heading font-black uppercase leading-none tracking-tight"
           >
-            About me
+            {config.aboutHeading}
           </h2>
         </FadeIn>
 
@@ -81,9 +80,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick }) =>
         <div className="h-10 sm:h-14 md:h-16" />
 
         {/* Animated paragraph */}
-        <div className="max-w-[560px] px-4">
+        <div className="max-w-[580px] px-4">
           <AnimatedText
-            text={aboutText}
+            key={config.aboutText}
+            text={config.aboutText}
             className="text-[#D7E2EA] font-medium text-center leading-relaxed text-[clamp(1rem,2vw,1.35rem)]"
           />
         </div>

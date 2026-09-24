@@ -1,50 +1,16 @@
 import React from 'react';
 import { FadeIn } from './FadeIn.tsx';
-
-interface ServiceItem {
-  number: string;
-  name: string;
-  description: string;
-}
-
-const servicesData: ServiceItem[] = [
-  {
-    number: '01',
-    name: '3D Modeling',
-    description:
-      'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.',
-  },
-  {
-    number: '02',
-    name: 'Rendering',
-    description:
-      'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.',
-  },
-  {
-    number: '03',
-    name: 'Motion Design',
-    description:
-      'Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.',
-  },
-  {
-    number: '04',
-    name: 'Branding',
-    description:
-      'Crafting cohesive visual identities -- from logos to full brand systems -- that communicate a clear and memorable presence.',
-  },
-  {
-    number: '05',
-    name: 'Web Design',
-    description:
-      'Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.',
-  },
-];
+import type { PortfolioConfig } from '../data/portfolioData.ts';
 
 interface ServicesSectionProps {
+  services: PortfolioConfig['services'];
   onSelectService?: (serviceName: string) => void;
 }
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
+export const ServicesSection: React.FC<ServicesSectionProps> = ({
+  services,
+  onSelectService,
+}) => {
   return (
     <section
       id="services"
@@ -53,18 +19,23 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <FadeIn delay={0} y={40} duration={0.8}>
-          <h2
-            style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
-            className="text-[#0C0C0C] font-black uppercase text-center leading-none tracking-tight mb-16 sm:mb-20 md:mb-28"
-          >
-            Services
-          </h2>
+          <div className="text-center mb-16 sm:mb-20 md:mb-24">
+            <h2
+              style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+              className="text-[#0C0C0C] font-black uppercase leading-none tracking-tight"
+            >
+              Services
+            </h2>
+            <p className="mt-4 text-xs sm:text-sm uppercase tracking-widest text-black/60 font-medium">
+              Comprehensive Full Stack Capabilities &bull; Inquiries Only
+            </p>
+          </div>
         </FadeIn>
 
         {/* Vertical List */}
         <div className="divide-y divide-[rgba(12,12,12,0.15)] border-t border-b border-[rgba(12,12,12,0.15)]">
-          {servicesData.map((service, index) => (
-            <FadeIn key={service.number} delay={index * 0.1} y={30} duration={0.7}>
+          {services.map((service, index) => (
+            <FadeIn key={service.number} delay={index * 0.08} y={30} duration={0.7}>
               <div
                 onClick={() => onSelectService?.(service.name)}
                 role="button"
@@ -86,16 +57,21 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
 
                 {/* Stacked Name & Description */}
                 <div className="flex flex-col gap-2 md:gap-3 flex-1">
-                  <h3
-                    style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
-                    className="font-medium uppercase text-[#0C0C0C] tracking-tight group-hover:translate-x-1 transition-transform duration-200"
-                  >
-                    {service.name}
-                  </h3>
+                  <div className="flex items-center justify-between gap-4">
+                    <h3
+                      style={{ fontSize: 'clamp(1.1rem, 2.2vw, 2.1rem)' }}
+                      className="font-medium uppercase text-[#0C0C0C] tracking-tight group-hover:translate-x-1 transition-transform duration-200"
+                    >
+                      {service.name}
+                    </h3>
+                    <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider px-3 py-1 rounded-full border border-black/20 text-black/70 group-hover:bg-black group-hover:text-white transition-colors">
+                      Inquire
+                    </span>
+                  </div>
                   <p
                     style={{
                       fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)',
-                      color: 'rgba(12, 12, 12, 0.6)',
+                      color: 'rgba(12, 12, 12, 0.65)',
                     }}
                     className="font-light leading-relaxed max-w-2xl"
                   >
