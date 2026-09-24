@@ -11,7 +11,6 @@ const row1Gifs = [
   'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
   'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
   'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
-  'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
 ];
 
 const row2Gifs = [
@@ -27,7 +26,6 @@ const row2Gifs = [
   'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif',
 ];
 
-// Tripled lists for seamless scroll visual density
 const row1Images = [...row1Gifs, ...row1Gifs, ...row1Gifs];
 const row2Images = [...row2Gifs, ...row2Gifs, ...row2Gifs];
 
@@ -40,7 +38,7 @@ const MarqueeTile: React.FC<MarqueeTileProps> = ({ src, index }) => {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="w-[420px] h-[270px] shrink-0 rounded-2xl overflow-hidden bg-[#151515] border border-white/10 relative">
+    <div className="w-[280px] h-[180px] sm:w-[350px] sm:h-[225px] md:w-[420px] md:h-[270px] shrink-0 rounded-2xl overflow-hidden bg-[#151515] border border-white/10 relative">
       {!hasError ? (
         <img
           src={src}
@@ -88,16 +86,16 @@ export const MarqueeSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full overflow-hidden bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10"
+      className="w-full overflow-hidden bg-[#0C0C0C] pt-16 sm:pt-28 md:pt-40 pb-8 sm:pb-10"
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5 sm:gap-3">
         {/* Row 1: Moves right on scroll */}
         <div
           style={{
             transform: row1Transform,
             willChange: 'transform',
           }}
-          className="flex gap-3 transition-transform duration-75 ease-out"
+          className="flex gap-2.5 sm:gap-3 transition-transform duration-75 ease-out"
         >
           {row1Images.map((src, i) => (
             <MarqueeTile key={`row1-${i}-${src.slice(-12)}`} src={src} index={i} />
@@ -110,7 +108,7 @@ export const MarqueeSection: React.FC = () => {
             transform: row2Transform,
             willChange: 'transform',
           }}
-          className="flex gap-3 transition-transform duration-75 ease-out"
+          className="flex gap-2.5 sm:gap-3 transition-transform duration-75 ease-out"
         >
           {row2Images.map((src, i) => (
             <MarqueeTile key={`row2-${i}-${src.slice(-12)}`} src={src} index={i} />

@@ -21,7 +21,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 md:p-10 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -35,19 +35,19 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-5xl overflow-hidden rounded-[32px] sm:rounded-[48px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-6 sm:p-8 md:p-10 shadow-2xl text-[#D7E2EA] z-10 my-auto max-h-[92vh] flex flex-col"
+          className="relative w-full max-w-5xl overflow-hidden rounded-[24px] sm:rounded-[36px] md:rounded-[48px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-7 md:p-10 shadow-2xl text-[#D7E2EA] z-10 my-auto max-h-[92vh] flex flex-col"
         >
           {/* Top Bar */}
-          <div className="flex items-center justify-between pb-6 border-b border-[#D7E2EA]/20">
-            <div className="flex items-center gap-4">
-              <span className="text-3xl sm:text-4xl font-black text-[#D7E2EA]">
+          <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-[#D7E2EA]/20">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-black text-[#D7E2EA]">
                 {project.number}
               </span>
               <div>
-                <span className="text-xs uppercase tracking-widest text-[#BBCCD7]">
+                <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#BBCCD7] block">
                   {project.category} Project &bull; {project.tagline}
                 </span>
-                <h2 className="text-xl sm:text-3xl font-black uppercase text-white">
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-black uppercase text-white">
                   {project.name}
                 </h2>
               </div>
@@ -55,62 +55,62 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="cursor-pointer rounded-full p-2.5 text-[#D7E2EA] hover:bg-white/10 transition-colors"
+              className="cursor-pointer rounded-full p-2 text-[#D7E2EA] hover:bg-white/10 transition-colors"
               aria-label="Close modal"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
 
           {/* Scrollable Body */}
-          <div className="overflow-y-auto mt-6 pr-2 space-y-8">
+          <div className="overflow-y-auto mt-4 sm:mt-6 pr-1 sm:pr-2 space-y-6 sm:space-y-8">
             {/* Image Preview Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-              <div className="md:col-span-5 flex flex-col gap-4">
-                <div className="rounded-[24px] sm:rounded-[32px] overflow-hidden bg-white/5 border border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4">
+              <div className="md:col-span-5 grid grid-cols-2 md:flex md:flex-col gap-3 sm:gap-4">
+                <div className="rounded-[18px] sm:rounded-[24px] md:rounded-[32px] overflow-hidden bg-white/5 border border-white/10 h-[140px] sm:h-[180px] md:h-[200px]">
                   <img
                     src={project.images.col1Top}
                     alt={`${project.name} preview 1`}
                     referrerPolicy="no-referrer"
-                    className="w-full h-[200px] object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="rounded-[24px] sm:rounded-[32px] overflow-hidden bg-white/5 border border-white/10">
+                <div className="rounded-[18px] sm:rounded-[24px] md:rounded-[32px] overflow-hidden bg-white/5 border border-white/10 h-[140px] sm:h-[180px] md:h-[260px]">
                   <img
                     src={project.images.col1Bottom}
                     alt={`${project.name} preview 2`}
                     referrerPolicy="no-referrer"
-                    className="w-full h-[260px] object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <div className="md:col-span-7">
-                <div className="rounded-[24px] sm:rounded-[32px] overflow-hidden bg-white/5 border border-white/10 h-full min-h-[300px]">
+                <div className="rounded-[18px] sm:rounded-[24px] md:rounded-[32px] overflow-hidden bg-white/5 border border-white/10 h-[220px] sm:h-[300px] md:h-full md:min-h-[476px]">
                   <img
                     src={project.images.col2}
                     alt={`${project.name} showcase`}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full min-h-[476px] object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
             </div>
 
             {/* Details & Specs */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 pt-4 border-t border-white/10">
               <div className="md:col-span-2">
-                <h3 className="text-sm uppercase tracking-widest text-[#BBCCD7] mb-2 font-medium">
+                <h3 className="text-xs sm:text-sm uppercase tracking-widest text-[#BBCCD7] mb-2 font-medium">
                   Architecture & Product Solution
                 </h3>
-                <p className="text-sm sm:text-base text-[#D7E2EA]/90 leading-relaxed font-light">
+                <p className="text-xs sm:text-sm md:text-base text-[#D7E2EA]/90 leading-relaxed font-light">
                   {project.description}
                 </p>
 
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {project.tools.map((tool) => (
                     <span
                       key={tool}
-                      className="px-3 py-1 rounded-full bg-white/5 border border-white/15 text-xs text-[#BBCCD7] font-medium"
+                      className="px-2.5 py-1 rounded-full bg-white/5 border border-white/15 text-[11px] sm:text-xs text-[#BBCCD7] font-medium"
                     >
                       {tool}
                     </span>
@@ -133,12 +133,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   </ul>
                 </div>
 
-                <div className="pt-2 flex flex-col gap-2.5">
+                <div className="pt-2 flex flex-col gap-2">
                   {project.liveUrl && (
                     <LiveProjectButton
                       label="View Project"
                       onClick={() => window.open(project.liveUrl, '_blank')}
-                      className="w-full text-center"
+                      className="w-full text-center !text-xs sm:!text-sm !py-2.5"
                     />
                   )}
                   {project.githubUrl && (
