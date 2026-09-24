@@ -37,12 +37,3 @@
   }
 }
 ```
-
-**After replacing the file**, run:
-
-```bash
-npm install
-npm run build
-```
-
-If you're deploying to Render, commit **both `package.json` and the newly generated `package-lock.json`**, then push them to GitHub.
